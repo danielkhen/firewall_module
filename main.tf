@@ -19,7 +19,7 @@ resource "azurerm_public_ip" "ip" {
 resource "azurerm_public_ip" "management_ip" {
   count = var.forced_tunneling ? 1 : 0
 
-  name                = var.management_public_ip_name
+  name                = var.management_public_ip_name #TODO generate this
   location            = var.location
   resource_group_name = var.resource_group_name
   allocation_method   = local.ip_allocation_method
