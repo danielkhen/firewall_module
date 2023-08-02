@@ -47,7 +47,6 @@ data "azurerm_log_analytics_workspace" "activity" {
 locals {
   firewall_name     = "firewall"
   firewall_sku_tier = "Standard"
-  firewall_ip_name  = "fw-ip"
 }
 
 module "firewall" {
@@ -57,7 +56,6 @@ module "firewall" {
   location            = local.location
   resource_group_name = azurerm_resource_group.test_rg.name
   sku_tier            = local.firewall_sku_tier
-  public_ip_name      = local.firewall_ip_name
   subnet_id           = module.vnet.subnet_ids["AzureFirewallSubnet"]
   log_analytics_id    = data.azurerm_log_analytics_workspace.activity.id
 }
