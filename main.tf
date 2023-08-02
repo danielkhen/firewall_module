@@ -1,11 +1,13 @@
 locals {
   ip_allocation_method = "Static"
-  sku_name             = "AZFW_VNet"
   ip_sku               = "Standard"
+
+  ip_name            = "${var.name}-ip"
+  management_ip_name = "${var.name}-mng-ip"
 }
 
 resource "azurerm_public_ip" "ip" {
-  name                = var.public_ip_name
+  name                = local.ip_name
   location            = var.location
   resource_group_name = var.resource_group_name
   sku                 = local.ip_sku
@@ -19,7 +21,7 @@ resource "azurerm_public_ip" "ip" {
 resource "azurerm_public_ip" "management_ip" {
   count = var.forced_tunneling ? 1 : 0
 
-  name                = var.management_public_ip_name #TODO generate this
+  name                = local.management_ip_name
   location            = var.location
   resource_group_name = var.resource_group_name
   allocation_method   = local.ip_allocation_method
@@ -33,6 +35,7 @@ resource "azurerm_public_ip" "management_ip" {
 locals {
   default_ip_configuration_name    = "default"
   management_ip_configuration_name = "management"
+  sku_name                         = "AZFW_VNet"
 }
 
 resource "azurerm_firewall" "firewall" {

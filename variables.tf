@@ -40,21 +40,10 @@ variable "management_subnet_id" {
   default     = null
 }
 
-variable "public_ip_name" {
-  description = "(Required) The name for the regular public ip."
-  type        = string
-}
-
 variable "forced_tunneling" {
   description = "(Optional) Is forced tunneling enabled."
   type        = bool
   default     = false
-}
-
-variable "management_public_ip_name" {
-  description = "(Optional) The name for the management public ip, Required if forced tunneling is enabled."
-  type        = string
-  default     = null
 }
 
 variable "log_analytics_id" {
