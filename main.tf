@@ -19,7 +19,7 @@ resource "azurerm_public_ip" "ip" {
 }
 
 resource "azurerm_public_ip" "management_ip" {
-  for_each = var.forced_tunneling ? [true] : []
+  for_each = var.forced_tunneling ? ['true'] : []
 
   name                = local.management_ip_name
   location            = var.location
@@ -92,7 +92,7 @@ module "ip_diagnostics" {
 
 module "management_ip_diagnostics" {
   source   = "github.com/danielkhen/diagnostic_setting_module"
-  for_each = var.forced_tunneling ? [true] : []
+  for_each = var.forced_tunneling ? ['true'] : []
 
   name                       = local.management_ip_diagnostic_name
   target_resource_id         = azurerm_public_ip.management_ip[0].id
